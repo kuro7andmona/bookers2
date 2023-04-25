@@ -1,6 +1,12 @@
 <<h1>Editing Book</h1>
-
-
+<% if @list.errors.any? %>
+  <%= @list.errors.count %>errors prohibited this obj from being saved:
+  <ul>
+    <% @list.errors.full_messages.each do |message| %>
+      <li><%= message %></li>
+    <% end %>
+  </ul>
+<% end %>
 
 
 <%= form_with model: @book, url: book_path(@book.id), method: :patch do |f|%>

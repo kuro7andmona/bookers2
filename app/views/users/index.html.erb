@@ -1,3 +1,4 @@
+
 <h1>User info</h1>
 
 <%= image_tag current_user.get_profile_image %>
@@ -42,7 +43,7 @@
     <tr>
       <td><%= image_tag user.get_profile_image %></td>
       <td><%= user.name %></td>
-      <td><<%= link_to 'Show', user_path(user.id) %></td>
+      <td><%= link_to 'Show', user_path(user.id) %></td>
       </tr>
       <% end %>
   </tbody>
