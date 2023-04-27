@@ -26,13 +26,13 @@ class UsersController < ApplicationController
 
   def create
     @user = User.new(user_params)
-
+     @book.user_id = current_user.id
     if @user.save
       flash[:success] = 'Welcome! You have signed up successfully.'
       redirect_to login_path
     else
-      flash.now[:danger] = 'ユーザー登録に失敗しました'
-      render :new
+      flash.now[:danger] = 'error'
+      render :index
     end
   end
 
