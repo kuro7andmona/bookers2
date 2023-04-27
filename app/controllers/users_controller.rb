@@ -6,9 +6,9 @@ class UsersController < ApplicationController
   end
 
   def show
+    @book = Book.new
     @user = User.find(params[:id])
-
-
+    @books = @user.books
   end
 
   def edit
@@ -24,10 +24,22 @@ class UsersController < ApplicationController
    end
   end
 
+  def create
+    @user = User.new(user_params)
+
+    if @user.save
+      flash[:success] = 'Welcome! You have signed up successfully.'
+      redirect_to login_path
+    else
+      flash.now[:danger] = 'ユーザー登録に失敗しました'
+      render :new
+    end
+  end
+
   private
 
   def user_params
-    params.require(:user).permit(:name, :profile_image)
+    params.require(:user).permit(:name, :profile_image, :email, :password, :password_confirmation)
   end
 
 end
