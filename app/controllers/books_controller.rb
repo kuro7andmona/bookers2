@@ -7,6 +7,7 @@ end
 def index
   @book = Book.new
   @books = Book.all
+  @user = current_user
 end
 
 def create
@@ -16,21 +17,15 @@ def create
    flash[:notice] = "You have created book successfully."
    redirect_to book_path(@book.id)
  else
+   @user = current_user
    @books = Book.all
    render :index
  end
 end
 
-# if @book.save
-#flash[:notice] = "You have created book successfully."
-# redirect_to book_path
-# else
-#   render :show
-# end
-# end
-
 def show
   @book = Book.find(params[:id])
+  @user = @book.user
 
 end
 

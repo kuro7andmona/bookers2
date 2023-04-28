@@ -13,8 +13,12 @@
 <td><p><%= current_user.introduction %></p></td>
 </tr>
 </table>
-
-    <p><%= link_to "a", edit_user_path(current_user) %></p>
+    <p><%= link_to edit_user_path(current_user) do %>
+    <button type="button" class=" btn btn-outline-secondary btn-block">
+      <span class= "fas fa-user-cog "></span>
+      </button>
+      <% end %>
+    </p>
 
 
   <h1>New book</h1>
@@ -26,7 +30,7 @@
 <h4>Opinion</h4>
 <%= f.text_area :body %>
 
-<p><%= f.submit'Create Book' %></p>
+<p><%= f.submit'Create Book',class: "btn btn-success" %></p>
 <% end %>
 
 <!--ユーザー投稿一覧-->
