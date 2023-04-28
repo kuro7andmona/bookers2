@@ -18,7 +18,8 @@ class UsersController < ApplicationController
   def update
    @user = User.find(params[:id])
    if @user.update(user_params)
-   redirect_to user_path(user.id)
+     flash[:notice] = "You have updated user successfully."
+   redirect_to user_path(@user.id)
    else
    render :edit
    end
@@ -28,7 +29,6 @@ class UsersController < ApplicationController
     @user = User.new(user_params)
      @book.user_id = current_user.id
     if @user.save
-      flash[:success] = 'Welcome! You have signed up successfully.'
       redirect_to login_path
     else
       flash.now[:danger] = 'error'
