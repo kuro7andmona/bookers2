@@ -53,4 +53,10 @@ before_action :is_matching_login_user, only: [:edit, :update]
     end
   end
 
+  def correct_user
+    @book = Book.find(params[:id])
+    @user = @book.user
+    redirect_to(books_path) unless @user == current_user
+  end
+
 end
