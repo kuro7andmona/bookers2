@@ -1,5 +1,5 @@
 <div class="container text-center col-3">
-<h1>User info</h1>
+<h2>User info</h2>
 
 
 <% if @user.errors.any? %>
@@ -13,22 +13,28 @@
 
 <%= form_with model: @user do |f| %>
 
-<div class="row">
+<div class="row py-6 px-12">
  <p>Name</p>
 <%= f.text_field :name %>
 </div>
 
-<div class="row">
+<div class="col-2 ">
 <p>Image</p>
-
+<div class="col-2">
  <%= f.file_field :profile_image, placeholder: "プロフィール画像", accept: "image/*" %>
+ </div>
  </div>
 
 <div class="row">
+
 <p>Introduction</p>
 <%= f.text_area :body %>
 </div>
 
+<div class="row">
+  <div class="col"></div>
 <p><%= f.submit'Update User',class: "btn btn-secondary" %></p>
 <% end %>
+</div>
+</div>
 </div>
