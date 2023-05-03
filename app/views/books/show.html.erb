@@ -1,52 +1,77 @@
 
-
+<div class="container">
+  <div class="col-md-3">
  <h1>User info</h1>
-
 <%= image_tag current_user.get_profile_image %>
-<table>
+<table class="table">
+<tbody>
+<tr></tr>
 <tr>
-<td><h5>name</h5></td>
-<td><%= current_user.name %></td>
+<th>name</th>
+<th><%= current_user.name %></th>
 </tr>
 <tr>
-<td><h3>Introduction</h3></td>
-<td><p><%= current_user.introduction %></p></td>
+<th>Introduction</th>
+<th><p><%= current_user.introduction %></p></th>
 </tr>
+</tbody>
 </table>
-    <p><%= link_to edit_user_path(current_user) do %>
-    <button type="button" class=" btn btn-outline-secondary btn-block">
-      <span class= "fas fa-user-cog "></span>
-      </button>
+
+  <div class="row">
+    <a><%= link_to edit_user_path(current_user), class:"btn btn-outline-secondary btn-block" do %>
+       <i class="fas fa-user-cog"></i>
       <% end %>
-    </p>
+    </a>
 
 
-  <h1>New book</h1>
+  <h2 class="mt-3">New book</h2>
 <%=form_with model: @book do |f| %>
-
+<form action="/books" accept-charset="UTF-8" method"post">
+  <input type="hidden" name="authenticity_token" value="" autocompleate"off">
+<div class="form-group">
 <p>Title</p>
-<%= f.text_field :title %>
-
+<input class="form-control book_title" type= "text" name="book[title]" id="book_title">
+<!--%= f.text_field :title %-->
+</div>
+<div class="form-group">
 <p>Opinion</p>
-<%= f.text_area :body %>
+<textarea class="form-control book_body" name="book[body]" id="book_body"></textarea>
+<!--%= f.text_area :body %-->
+</div>
 
+<div class="form-group">
 <p><%= f.submit'Create Book',class: "btn btn-success" %></p>
 <% end %>
+</div>
+</form>
 
+<div class="col-md-8 offset-md-1">
 <!--ユーザー投稿一覧-->
-<h1>Book detail</h1>
-
-<table>
+<h2>Book detail</h2>
+</div>
+<table class="table">
+  <tbody>
     <tr>
-      <td><%= image_tag @user.get_profile_image %></td>
-      <td><%= link_to @user.name, user_path(@user) %></td>
+      <td><%= image_tag @user.get_profile_image %><br>
+      <%= link_to @user.name, user_path(@user) %></td>
       <td><%= link_to @book.title, book_path(@book) %></td>
       <td><%= @book.body %></td>
       <% if @book.user_id == current_user.id %>
-      <td><%= link_to 'Edit', edit_book_path(@book) %></td>
-      <td><%= link_to "Destroy", book_path(@book), method: :delete, "data-confirm" => "本当に消しますか？" %></td>
+      <td><%= link_to edit_book_path(@book), class:"btn btn-success" do %>
+      Edit
+      <% end %>
+      </td>
+      <td><%= link_to book_path(@book), method: :delete, "data-confirm" => "本当に消しますか？", class:"btn btn-danger" do %>
+      Delete
+      <% end %>
+      </td>
+      <% end %>
     </tr>
+  </tbody>
 </table>
-<% end %>
+</div>
+</div>
+</div>
+
 
 

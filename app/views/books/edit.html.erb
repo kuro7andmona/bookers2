@@ -1,29 +1,39 @@
+<div class="container">
+  <div class="row">
+    <div class="col-sm-12 col-md-8 col-lg-5 px-5 px-sm-0 mx-auto">
 <h1>Editing Book</h1>
-<% if @list.errors.any? %>
-  <%= @list.errors.count %>errors prohibited this obj from being saved:
+<% if @book.errors.any? %>
+  <%= @book.errors.count %>errors prohibited this obj from being saved:
   <ul>
-    <% @list.errors.full_messages.each do |message| %>
+    <% @book.errors.full_messages.each do |message| %>
       <li><%= message %></li>
     <% end %>
   </ul>
 <% end %>
 
-
+<form action="/books/" accept-charset="UTF-8" method="post">
+  <input type="hidden" name="_method" value="patch" autocomplete-"off">
 <%= form_with model: @book, url: book_path(@book.id), method: :patch do |f|%>
 
-<h4>Title</h4>
-<%= f.text_field :title %>
+<div class="form-group">
 
-<h4>Opinion</h4>
-<%= f.text_area :body %>
+<p>Title</p>
+<input class="form-control book_title" type="text" value="" name="book[title]" id="book_title">
+<!--%= f.text_field :title %-->
+</div>
 
-<%= f.submit'Update Book' %>
-
+<div class="form-group">
+<p>Opinion</p>
+ <textarea class="form-control book_body" name="book[body]" id="book_body"></textarea>
+<!--%= f.text_area :body %-->
+</div>
+<div class="form-group">
+  </div>
+<%= f.submit'Update Book', class:"btn btn-success" %>
 <% end %>
-<table>
-<tr>
-<td><%= link_to 'Show', book_path(@book.id) %> |</td>
+</form>
 
-<td><%= link_to 'Back', books_path %></td>
-</tr>
-</table>
+
+<a><%= link_to 'Show', book_path(@book.id) %> </a>
+|
+<a><%= link_to 'Back', books_path %></a>
