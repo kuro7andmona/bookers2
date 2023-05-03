@@ -14,13 +14,13 @@ before_action :is_matching_login_user, only: [:edit, :update]
   end
 
   def edit
+
     @user = User.find(params[:id])
-     redirect_to users_path
   end
 
   def update
+
    @user = User.find(params[:id])
-     redirect_to user_path(@user.id)
    if @user.update(user_params)
      flash[:notice] = "You have updated user successfully."
    redirect_to user_path(@user.id)
@@ -33,9 +33,9 @@ before_action :is_matching_login_user, only: [:edit, :update]
     @user = User.new(user_params)
      @book.user_id = current_user.id
     if @user.save
-      redirect_to login_path
+      redirect_to users_path
     else
-      flash.now[:danger] = 'error'
+      #flash.now[:danger] = 'error'
       render :index
     end
   end
@@ -43,20 +43,13 @@ before_action :is_matching_login_user, only: [:edit, :update]
   private
 
   def user_params
-    params.require(:user).permit(:name, :profile_image, :email, :password, :password_confirmation)
+    params.require(:user).permit(:name, :profile_image, :password, :password_confirmation)
   end
 
   def is_matching_login_user
     user = User.find(params[:id])
     unless user.id == current_user.id
-      redirect_to post_images_path
+      redirect_to user_path(@user.id)
     end
   end
-
-  def correct_user
-    @book = Book.find(params[:id])
-    @user = @book.user
-    redirect_to(books_path) unless @user == current_user
-  end
-
 end

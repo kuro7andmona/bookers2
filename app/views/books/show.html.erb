@@ -2,17 +2,17 @@
 <div class="container">
   <div class="col-md-3">
  <h1>User info</h1>
-<%= image_tag current_user.get_profile_image %>
+<%= image_tag @user.get_profile_image %>
 <table class="table">
 <tbody>
 <tr></tr>
 <tr>
 <th>name</th>
-<th><%= current_user.name %></th>
+<th><%= @user.name %></th>
 </tr>
 <tr>
 <th>Introduction</th>
-<th><p><%= current_user.introduction %></p></th>
+<th><p><%= @user.introduction %></p></th>
 </tr>
 </tbody>
 </table>
@@ -56,7 +56,7 @@
       <%= link_to @user.name, user_path(@user) %></td>
       <td><%= link_to @book.title, book_path(@book) %></td>
       <td><%= @book.body %></td>
-      <% if @book.user_id == current_user.id %>
+      <% if @book.user == current_user %>
       <td><%= link_to edit_book_path(@book), class:"btn btn-success" do %>
       Edit
       <% end %>

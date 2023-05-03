@@ -3,7 +3,6 @@
     <div class="col-sm-12 col-md-8 col-lg-5 px-5 px-sm-0 mx-auto">
 <h2>User info</h2>
 
-
 <% if @user.errors.any? %>
   <%= @user.errors.count %>errors prohibited this obj from being saved:
   <ul>
@@ -13,32 +12,28 @@
   </ul>
 <% end %>
 
+
 <%= form_with model: @user do |f| %>
-<form>
 <div class="form-group">
-  <input class="form-control">
  <p>Name</p>
-<%= f.text_field :name %>
-</input>
+ <%= f.text_field :name  %>
+
 </div>
 
-<div class="col-2 ">
+<div class="form-group">
 <p>Image</p>
-<div class="col-2">
  <%= f.file_field :profile_image, placeholder: "プロフィール画像", accept: "image/*" %>
  </div>
- </div>
 
-<div class="row">
-
+<div class="form-group">
 <p>Introduction</p>
-<%= f.text_area :body %>
+<p><%= f.text_area :body  %></p>
 </div>
 
-<div class="row">
-  <div class="col"></div>
+<div class="form-group">
 <p><%= f.submit'Update User',class: "btn btn-secondary" %></p>
 <% end %>
+</div>
 </div>
 </div>
 </div>
