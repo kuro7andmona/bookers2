@@ -14,12 +14,10 @@ before_action :is_matching_login_user, only: [:edit, :update]
   end
 
   def edit
-
     @user = User.find(params[:id])
   end
 
   def update
-
    @user = User.find(params[:id])
    if @user.update(user_params)
      flash[:notice] = "You have updated user successfully."
@@ -43,7 +41,7 @@ before_action :is_matching_login_user, only: [:edit, :update]
   private
 
   def user_params
-    params.require(:user).permit(:name, :profile_image, :password, :password_confirmation)
+    params.require(:user).permit(:name, :profile_image, :introduction, :password, :password_confirmation)
   end
 
   def is_matching_login_user
