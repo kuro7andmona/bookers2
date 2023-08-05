@@ -33,7 +33,6 @@ before_action :is_matching_login_user, only: [:edit, :update]
     if @user.save
       redirect_to users_path
     else
-      #flash.now[:danger] = 'error'
       render :index
     end
   end
